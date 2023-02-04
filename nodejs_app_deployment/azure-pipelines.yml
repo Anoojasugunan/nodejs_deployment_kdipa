@@ -34,7 +34,7 @@ stages:
         command: build
         containerRegistry: 'docker-login'
         repository: '$(namespace)/$(image)'
-        dockerfile: '$(Build.SourcesDirectory)/knote-js/application/Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/nodejs_app_deployment/knote-js/application/Dockerfile'
         tags: '$(Build.BuildId)-amd64'     
     - task: Docker@2
       displayName: push image to ACR
@@ -47,5 +47,5 @@ stages:
       displayName: deployment of application  
       inputs:
         script: 'kubectl set image deployment/knote knote=stgacr.azurecr.io/learnkube8s/knote-js:$(Build.BuildId)-amd64 -n learnkube8s'
-        workingDirectory: '$(Build.SourcesDirectory)/knote-js/application/kube/'
+        workingDirectory: '$(Build.SourcesDirectory)/nodejs_app_deployment/knote-js/application/kube/'
         
