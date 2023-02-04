@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: List
+items:
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    name: nodeapps-route
+    namespace: learnkube8s
+  spec:
+    host: nodeapps-ui.apps.stg.kdipa.gov.kw
+    port:
+      targetPort: 3000
+    to:
+      kind: Service
+      name: nodeapp
+      weight: 100
+    wildcardPolicy: None
